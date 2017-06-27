@@ -9,8 +9,8 @@ public class TreeseederController {
 
 	@RequestMapping("/")
 	public String handleRequest(Model model) {
-		model.addAttribute("test", "THIS IS THE TEST ATTRIBUTE VALUE");
-		return "blank";
+		
+		return "index";
 	}
 	
 }
