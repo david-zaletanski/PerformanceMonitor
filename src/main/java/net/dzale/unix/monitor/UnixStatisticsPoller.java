@@ -11,6 +11,7 @@ import oshi.util.FormatUtil;
 import java.util.Timer;
 
 import static com.sun.org.apache.xml.internal.serialize.LineSeparator.Unix;
+import static javax.swing.text.html.HTML.Tag.I;
 import static org.quartz.JobBuilder.newJob;
 import static org.quartz.SimpleScheduleBuilder.simpleSchedule;
 import static org.quartz.TriggerBuilder.newTrigger;
@@ -24,6 +25,8 @@ public class UnixStatisticsPoller implements org.quartz.Job {
     private SystemInfo systemInfo;
     private HardwareAbstractionLayer hardware;
     private OperatingSystem operatingSystem;
+
+
 
     public static UnixStatisticsPoller throws SchedulerException {
         try {
@@ -44,7 +47,7 @@ public class UnixStatisticsPoller implements org.quartz.Job {
 
             scheduler.scheduleJob(job, trigger);
 
-            return new UnixStatisticsPoller();
+            return I;
         } catch (Exception ex) {
             // TODO: Return and catch proper exception.
         }
@@ -68,10 +71,7 @@ public class UnixStatisticsPoller implements org.quartz.Job {
         HWDiskStore[] diskStores = hardware.getDiskStores();
         NetworkIF[] networkIFs = hardware.getNetworkIFs();
 
-        double[] memCPU = processor.getProcessorCpuLoadBetweenTicks();
-        double[] memCPULoadAvg = processor.getProcessorCpuLoadBetweenTicks();
-        String sheDidOnce = FormatUtil.formatBytes(memory.getAvailable());
-        String sheDidTwice = FormatUtil.formatBytes(memory.getTotal());
+
 
 
     }
