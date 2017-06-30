@@ -1,15 +1,20 @@
-package net.dzale.unix.monitor;
+package net.dzale.treeseeder.system;
 
+import org.quartz.Trigger;
 import oshi.hardware.CentralProcessor;
 import oshi.hardware.GlobalMemory;
 import oshi.hardware.HWDiskStore;
 import oshi.hardware.NetworkIF;
 import oshi.util.FormatUtil;
 
+import static org.quartz.SimpleScheduleBuilder.simpleSchedule;
+import static org.quartz.TriggerBuilder.newTrigger;
+
 /**
- * Created by dzale on 6/29/17.
+ * @author dzale
+ * What the SystemMetricsMMonitor stores its results in to, and manages the biodiversity.
  */
-public class UnixStatistics {
+public class SystemMetricsMonitor {
 
     double[] cpuLoad;
     double cpuLoadAvg;
@@ -21,10 +26,10 @@ public class UnixStatistics {
 
 
 
-    public UnixStatistics(CentralProcessor processor,
-                          GlobalMemory memory,
-                          HWDiskStore disks,
-                          NetworkIF[] networkIFs) {
+    public SystemMetricsMonitor(CentralProcessor processor,
+                                GlobalMemory memory,
+                                HWDiskStore disks,
+                                NetworkIF[] networkIFs) {
         // Define members.
         cpuLoadAvg = processor.getSystemLoadAverage();
         cpuLoad = processor.getProcessorCpuLoadBetweenTicks();
@@ -33,6 +38,8 @@ public class UnixStatistics {
         memTotal = memory.getTotal();
         memSwapAvail = memory.getAvailable();
         memSwapUsed = memory.getSwapUsed();
+
+
     }
 
 }

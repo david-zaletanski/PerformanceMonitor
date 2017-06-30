@@ -4,13 +4,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+/**
+ *
+ */
 @Controller
-@RequestMapping("/srv")
-public class TreeseederPerformanceController {
+public class DiezelController {
 
-    @RequestMapping("/prf")
-    public String handleRequest(Model model) {
-        return "admin";
-    }
-
+	@RequestMapping("/")
+	public String handleRequest(Model model) {
+		return "index";
+	}
+	
 }
