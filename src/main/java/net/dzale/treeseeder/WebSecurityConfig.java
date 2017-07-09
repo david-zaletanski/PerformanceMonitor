@@ -23,7 +23,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
             .authorizeRequests()
-            //.antMatchers("/", "/webjars/**").permitAll() // Allow page/libraries to be accessed.
+                .antMatchers("/console/**").permitAll()     // Allow H2 database browser console
             .antMatchers("/webjars/**").permitAll()		// Allow our libraries to be accessed.
             .antMatchers("/").hasRole("ADMIN") 			// Don't allow anyone to see page unless logged in.
             .antMatchers("/admin").hasRole("ADMIN")
@@ -31,6 +31,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             // Warning: The following allows the logout link to be accessed via GET instead of POST, which is generally NOT recommended
             .and().logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login?logout");
 
+        http.csrf().disable();
+        http.headers().frameOptions().disable();
     }
 
     @Autowired

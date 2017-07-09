@@ -8,3 +8,7 @@ https://blackrockdigital.github.io/startbootstrap-sb-admin-2/pages/index.html
 A basic security implementation exists to view the site.
 
 Use the username/password:	admin/password
+
+# Dashboard
+
+## System CPU Load Graph - The average load on the CPU over the last minute.

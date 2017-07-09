@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="en"
-      xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      lang="en"
+      xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
     <meta charset="utf-8"/>
@@ -898,8 +898,14 @@
 <!-- Custom Theme JavaScript -->
 <script src="webjars/startbootstrap-sb-admin-2/3.3.7+1/js/sb-admin-2.js"></script>
 
-<script>
-Morris.Area({
+<script type="text/javascript" th:inline="javascript">
+
+/* Morris Data is fed as JavaScript, variable data injection
+ * https://morrisjs.github.io/morris.js/lines.html */
+
+/*<![CDATA[*/
+
+/*Morris.Area({
   element: 'morris-area-chart',
   data: [
     { y: '2006', a: 100, b: 90 },
@@ -913,6 +919,14 @@ Morris.Area({
   xkey: 'y',
   ykeys: ['a', 'b'],
   labels: ['Series A', 'Series B']
+});*/
+
+Morris.Area({
+  element: 'morris-area-chart',
+  data: /*[[${recentCpuLoadJSON}]]*/,
+  xkey: 'x',
+  ykeys: ['y'],
+  labels: ['CPU Load']
 });
 
 Morris.Bar({
@@ -939,6 +953,8 @@ Morris.Donut({
     {label: "Mail-Order Sales", value: 20}
   ]
 });
+
+ /*]]>*/
 </script>
 
 </body>

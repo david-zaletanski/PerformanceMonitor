@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 
 <head>
 
@@ -29,6 +29,9 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+
+    <!-- Morris Charts CSS -->
+    <link href="webjars/morrisjs/0.5.1/morris.css" rel="stylesheet"/>
 
 </head>
 
@@ -96,13 +99,13 @@
                 <div class="col-lg-4">
                     <div class="panel panel-primary">
                         <div class="panel-heading">
-                            Panel 1
+                            System CPU Load
                         </div>
                         <div class="panel-body">
-                            This panel will have some information about the server.
+                            <div width=100% height=100% id="morris-area-chart"></div>
                         </div>
                         <div class="panel-footer">
-                            Panel Footer
+                            System CPU Load per second over the last minute.
                         </div>
                     </div>
                 </div>
@@ -150,8 +153,30 @@
     <!-- Metis Menu Plugin JavaScript -->
     <script src="webjars/metisMenu/1.1.2/metisMenu.min.js"></script>
 
+    <!-- Morris Charts JavaScript -->
+    <script src="webjars/raphaeljs/2.1.4/raphael-min.js"></script>
+    <script src="webjars/morrisjs/0.5.1/morris.min.js"></script>
+
     <!-- Custom Theme JavaScript -->
     <script src="webjars/startbootstrap-sb-admin-2/3.3.7+1/js/sb-admin-2.js"></script>
+
+    <script type="text/javascript" th:inline="javascript">
+
+    /*<![CDATA[*/
+
+    Morris.Area({
+      element: 'morris-area-chart',
+      data: /*[[${recentCpuLoadJSON}]]*/,
+      xkey: 'x',
+      ykeys: ['y'],
+      labels: ['CPU Load'],
+      xLabels: ['second']
+    });
+
+    /*]]>*/
+
+
+    </script>
 
 </body>
 
