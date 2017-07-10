@@ -51,7 +51,7 @@ public class SystemMetricsService {
         persistWhenLastPersistedGreaterThanInterval(newMetrics);
 
         // Add metrics to cache and clear old entities.
-        if (new Double(newMetrics.getCpuLoad()).equals(0.0)) // Prevents double-adding during startup
+        if (!new Double(newMetrics.getCpuLoad()).equals(0.0)) // Prevents double-adding during startup
             recentMetrics.add(newMetrics);
         if (recentMetrics.size() > MAX_RECENT_QUEUE_SIZE) {
             recentMetrics.remove();
@@ -90,12 +90,46 @@ public class SystemMetricsService {
         this.recentMetrics = recentMetrics;
     }
 
-    public List<DataPoint2D> getRecentMetricsCPULoadDataPoints() throws DiezelException {
+    public List<DataPoint2D> getRecentMetricsSystemCPULoadDataPoints() throws DiezelException {
         List<DataPoint2D> dataPoints = new ArrayList<>();
         for (SystemMetrics metric : recentMetrics) {
             dataPoints.add(new DataPoint2D(metric.getCollectionTimestamp().getTime(), metric.getCpuLoad() * 100));
         }
         return dataPoints;
+    }
+
+    public List<DataPoint4D> getRecentMetricsCPULoadDataPoints() throws DiezelException {
+        List<DataPoint4D> dataPoints = new ArrayList<>();
+        /*for (SystemMetrics metric : recentMetrics) {
+            dataPoints.add(new DataPoint4D(metric.getCollectionTimestamp().getTime(),
+                    metric.getCpuLoadAvg()[0],
+                    metric.getCpuLoadAvg()[1],
+                    metric.getCpuLoadAvg()[2]
+            ));
+        }*/
+        SystemMetrics metric = recentMetrics.peek();
+        dataPoints.add(new DataPoint4D(metric.getCollectionTimestamp().getTime(),
+                metric.getCpuLoadAvg()[0],
+                metric.getCpuLoadAvg()[1],
+                metric.getCpuLoadAvg()[2]
+        ));
+        return dataPoints;
+    }
+
+    public int getNumVirtualCPU() {
+        return recentMetrics.peek().getCpuLogicalCount();
+    }
+
+    public List<MorrisDonutDataPoint> getRecentFSDataPoints() throws DiezelException {
+        List<MorrisDonutDataPoint> dataPoints = new ArrayList<>();
+        SystemMetrics metric = recentMetrics.peek();
+        dataPoints.add(new MorrisDonutDataPoint("Used", metric.getHdUsable()));
+        dataPoints.add(new MorrisDonutDataPoint("Unused", metric.getHdTotal() - metric.getHdUsable()));
+        return dataPoints;
+    }
+
+    public long getFSStorageTotal() {
+        return recentMetrics.peek().getHdTotal();
     }
 
     public class DataPoint2D {
@@ -113,6 +147,54 @@ public class SystemMetricsService {
 
         public double getY() {
             return y;
+        }
+    }
+
+    public class DataPoint4D {
+        public final long x;
+        public final double a;
+        public final double b;
+        public final double c;
+
+        public DataPoint4D(long x, double a, double b, double c) {
+            this.x = x;
+            this.a = a;
+            this.b = b;
+            this.c = c;
+        }
+
+        public long getX() {
+            return x;
+        }
+
+        public double getA() {
+            return a;
+        }
+
+        public double getB() {
+            return b;
+        }
+
+        public double getC() {
+            return c;
+        }
+    }
+
+    public class MorrisDonutDataPoint {
+        public final String label;
+        public final double value;
+
+        public MorrisDonutDataPoint(String label, double value) {
+            this.label = label;
+            this.value = value;
+        }
+
+        public String getLabel() {
+            return label;
+        }
+
+        public double getValue() {
+            return value;
         }
     }
 }

@@ -22,14 +22,18 @@ public class DiezelController {
 	@RequestMapping("/")
 	public String handleRequest(Model model) throws DiezelException {
 		// Create CPU Load Graph Data
-		model.addAttribute("recentCpuLoadJSON", systemMetricsService.getRecentMetricsCPULoadDataPoints());
-
+		model.addAttribute("recentSystemCpuLoad", systemMetricsService.getRecentMetricsSystemCPULoadDataPoints());
+		model.addAttribute("numVirtualCpu", systemMetricsService.getNumVirtualCPU());
+		model.addAttribute("recentCpuLoad", systemMetricsService.getRecentMetricsCPULoadDataPoints());
+		model.addAttribute("recentFSTotal", systemMetricsService.getFSStorageTotal());
+		model.addAttribute("recentFSUsage", systemMetricsService.getRecentFSDataPoints());
 		return "index";
 	}
 
 	@RequestMapping("/admin")
 	public String handleAdminRequest(Model model) throws DiezelException {
-		model.addAttribute("recentCpuLoadJSON", systemMetricsService.getRecentMetricsCPULoadDataPoints());
+		model.addAttribute("recentSystemCpuLoad", systemMetricsService.getRecentMetricsSystemCPULoadDataPoints());
+		model.addAttribute("recentCpuLoad", systemMetricsService.getRecentMetricsCPULoadDataPoints());
 		return "admin";
 	}
 	

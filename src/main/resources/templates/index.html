@@ -96,27 +96,27 @@
             <!-- /.container-fluid -->
             
             <div class="row">
-                <div class="col-lg-4">
+                <div class="col-sm-4">
                     <div class="panel panel-primary">
                         <div class="panel-heading">
-                            System CPU Load
+                            System CPU Utilization (Last 60 seconds)
                         </div>
                         <div class="panel-body">
-                            <div width=100% height=100% id="morris-area-chart"></div>
+                            <div id="morris-area-chart"></div>
                         </div>
-                        <div class="panel-footer">
-                            System CPU Load per second over the last minute.
-                        </div>
+                        <!--<div class="panel-footer">-->
+                        <!--System CPU Load per second over the last minute.-->
+                        <!--</div>-->
                     </div>
                 </div>
                 <!-- /.col-lg-4 -->
-                <div class="col-lg-4">
+                <div class="col-sm-4">
                     <div class="panel panel-primary">
                         <div class="panel-heading">
-                            Panel 2
+                            Current System CPU Load (Out of <b th:text="${numVirtualCpu}"/> vCPU)
                         </div>
                         <div class="panel-body">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, posuere lectus et, fringilla augue.</p>
+                            <div id="morris-bar-chart"></div>
                         </div>
                         <!--<div class="panel-footer">
                             Panel Footer
@@ -124,17 +124,17 @@
                     </div>
                 </div>
                 <!-- /.col-lg-4 -->
-                <div class="col-lg-4">
+                <div class="col-sm-4">
                     <div class="panel panel-primary">
                         <div class="panel-heading">
-                            Panel 3
+                            Current File System Disk Utilization %
                         </div>
                         <div class="panel-body">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, posuere lectus et, fringilla augue.</p>
+                            <div id="morris-donut-chart"></div>
                         </div>
-                        <div class="panel-footer">
-                            Panel Footer
-                        </div>
+                        <!--<div class="panel-footer">-->
+                        <!--Panel Footer-->
+                        <!--</div>-->
                     </div>
                 </div>
                 <!-- /.col-lg-4 -->
@@ -164,13 +164,50 @@
 
     /*<![CDATA[*/
 
-    Morris.Area({
+    var morrisArea = Morris.Area({
       element: 'morris-area-chart',
-      data: /*[[${recentCpuLoadJSON}]]*/,
+      data: /*[[${recentSystemCpuLoad}]]*/,
       xkey: 'x',
       ykeys: ['y'],
-      labels: ['CPU Load'],
-      xLabels: ['second']
+      labels: ['System CPU Load'],
+      xLabels: ['second'],
+      resize: true,
+      hideHover: 'always',
+      pointSize: 0
+    });
+
+    var morrisBarFormatX = function (x) {
+       return 'CPU Load Interval';
+    };
+    var morrisBar = Morris.Bar({
+      element: 'morris-bar-chart',
+      data: /*[[${recentCpuLoad}]]*/,
+      xkey: 'x',
+      ykeys: ['a', 'b', 'c'],
+      labels: ['CPU Load 5min', 'CPU Load 10min', 'CPU Load 15min'],
+      xLabels: ['second'],
+      xLabelFormat: morrisBarFormatX,
+      resize: true,
+      hideHover: 'auto',
+      barColors: [ '#336600', '#666633', '#999966' ]
+    });
+
+    var hdTotal = /*[[${recentFSTotal}]]*/;
+    var hdTotalTrunc = Math.floor(hdTotal * 10) / 10;
+
+    var morrisDonut = Morris.Donut({
+      element: 'morris-donut-chart',
+      data: /*[[${recentFSUsage}]]*/,
+      resize: true,
+      formatter: function (value, data) { return Math.floor((value/hdTotalTrunc *100) * 10)/10 + '%'; }, // Truncate
+      colors: [ '#990033', '#009900' ]
+    });
+
+    /* Resizes morris graphs when page resizes. */
+    $(window).resize(function () {
+        morrisArea.redraw();
+        morrisBar.redraw();
+        morrisDonut.redraw();
     });
 
     /*]]>*/
