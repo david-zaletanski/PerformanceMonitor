@@ -132,6 +132,18 @@ public class SystemMetricsService {
         return recentMetrics.peek().getHdTotal();
     }
 
+    public List<MorrisDonutDataPoint> getRecentMemoryDataPoints() throws DiezelException {
+        List<MorrisDonutDataPoint> dataPoints = new ArrayList<>();
+        SystemMetrics metric = recentMetrics.peek();
+        dataPoints.add(new MorrisDonutDataPoint("Used", metric.getMemUsed()));
+        dataPoints.add(new MorrisDonutDataPoint("Unused", metric.getMemAvail()));
+        return dataPoints;
+    }
+
+    public long getMemoryStorageTotal() {
+        return recentMetrics.peek().getMemTotal();
+    }
+
     public class DataPoint2D {
         public final long x;
         public final double y;
@@ -179,6 +191,7 @@ public class SystemMetricsService {
             return c;
         }
     }
+
 
     public class MorrisDonutDataPoint {
         public final String label;
