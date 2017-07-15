@@ -14,3 +14,27 @@
 # Maven
 log/
 target/
+
+# Android built artifacts
+*.apk
+*.ap_
+*.dex
+
+# Java build artifacts class files
+*.class
+
+# other generated files
+bin/
+gen/
+build/
+
+# local configuration file (for Android sdk path, etc)
+local.properties
+
+# Android Studio
+*.iml
+.idea
+.gradle
+
+#NDK
+obj/
