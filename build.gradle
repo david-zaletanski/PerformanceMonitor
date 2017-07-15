@@ -1,0 +1,59 @@
+apply plugin: 'java'
+apply plugin: 'maven'
+
+group = 'net.dzale'
+version = '0.0.1-SNAPSHOT'
+
+description = """treeseeder"""
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+tasks.withType(JavaCompile) {
+	options.encoding = 'UTF-8'
+}
+
+
+
+repositories {
+        
+     maven { url "http://repo.maven.apache.org/maven2" }
+}
+dependencies {
+    // Spring Boot Dependencies
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version:'1.5.3.RELEASE'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-thymeleaf', version:'1.5.3.RELEASE'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-security', version:'1.5.3.RELEASE'
+    compile group: 'org.springframework', name: 'spring-context-support', version:'4.3.8.RELEASE'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-actuator', version:'1.5.3.RELEASE'
+    compile(group: 'org.springframework.boot', name: 'spring-boot-starter-test', version:'1.5.3.RELEASE') {
+        exclude(module: 'commons-logging')
+    }
+
+    runtime group: 'org.springframework.boot', name: 'spring-boot-devtools', version:'1.5.3.RELEASE'
+
+    // Database
+    compile group: 'com.h2database', name: 'h2', version:'1.4.196'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version:'1.5.3.RELEASE'
+    
+
+    // JavaScript Libraries
+    compile group: 'org.webjars', name: 'bootstrap', version:'3.3.7'
+    compile group: 'org.webjars', name: 'jquery', version:'3.2.1'
+    compile group: 'org.webjars', name: 'startbootstrap-sb-admin-2', version:'3.3.7+1'
+    compile group: 'org.webjars', name: 'metisMenu', version:'1.1.2'
+    compile group: 'org.webjars', name: 'morrisjs', version:'0.5.1'
+    compile group: 'org.webjars', name: 'raphaeljs', version:'2.1.4'
+    compile group: 'org.webjars', name: 'font-awesome', version:'4.7.0'
+    
+    // System Metrics API
+    compile group: 'net.java.dev.jna', name: 'jna', version:'4.4.0'
+    compile group: 'com.github.oshi', name: 'oshi-core', version:'3.4.3'
+    compile group: 'com.github.oshi', name: 'oshi-json', version:'3.4.3'
+    
+    // Quartz API
+    compile group: 'org.quartz-scheduler', name: 'quartz', version:'2.2.1'
+    compile group: 'org.quartz-scheduler', name: 'quartz-jobs', version:'2.2.1'
+
+    // Tool API
+    compile group: 'org.javatuples', name: 'javatuples', version:'1.2'
+}
