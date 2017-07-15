@@ -11,4 +11,11 @@ Use the username/password:	admin/password
 
 # Dashboard
 
-## System CPU Load Graph - The average load on the CPU over the last minute.
+## Metrics
+
+The dashboard provides up to date system performance metrics.
+
+* **System CPU Load Graph** - The percentage that the CPU has been utilized over the last minute.
+* **Average CPU Load Graph** - The average system load over the past 1min-, 5min-, and 15min- intervals.
+* **File System Utilization** - The percentage of used and free space on the filesystem.
+* **System Memory Utilization** - The percentage of used and free system memory.

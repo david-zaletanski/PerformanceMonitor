@@ -96,10 +96,10 @@
             <!-- /.container-fluid -->
             
             <div class="row">
-                <div class="col-sm-4">
+                <div class="col-sm-3">
                     <div class="panel panel-primary">
                         <div class="panel-heading">
-                            System CPU Utilization (Last 60 seconds)
+                            System CPU Utilization % (Last 60sec)
                         </div>
                         <div class="panel-body">
                             <div id="morris-area-chart"></div>
@@ -110,10 +110,10 @@
                     </div>
                 </div>
                 <!-- /.col-lg-4 -->
-                <div class="col-sm-4">
+                <div class="col-sm-3">
                     <div class="panel panel-primary">
                         <div class="panel-heading">
-                            Current System CPU Load (Out of <b th:text="${numVirtualCpu}"/> vCPU)
+                            UNIX System CPU Load Average (Out of <b th:text="${numVirtualCpu}"/> vCPU)
                         </div>
                         <div class="panel-body">
                             <div id="morris-bar-chart"></div>
@@ -124,7 +124,7 @@
                     </div>
                 </div>
                 <!-- /.col-lg-4 -->
-                <div class="col-sm-4">
+                <div class="col-sm-3">
                     <div class="panel panel-primary">
                         <div class="panel-heading">
                             Current File System Disk Utilization %
@@ -138,6 +138,19 @@
                     </div>
                 </div>
                 <!-- /.col-lg-4 -->
+                <div class="col-sm-3">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            Current System Memory Utilization %
+                        </div>
+                        <div class="panel-body">
+                            <div id="morris-donut-chart2"></div>
+                        </div>
+                        <!--<div class="panel-footer">-->
+                        <!--Panel Footer-->
+                        <!--</div>-->
+                    </div>
+                </div>
             </div>
         </div>
         <!-- /#page-wrapper -->
@@ -200,6 +213,17 @@
       data: /*[[${recentFSUsage}]]*/,
       resize: true,
       formatter: function (value, data) { return Math.floor((value/hdTotalTrunc *100) * 10)/10 + '%'; }, // Truncate
+      colors: [ '#009900', '#990033' ]
+    });
+
+    var memTotal = /*[[${recentMemTotal}]]*/;
+    var memTotalTrunc = Math.floor(memTotal * 10) / 10;
+
+    var morrisDonut2 = Morris.Donut({
+      element: 'morris-donut-chart2',
+      data: /*[[${recentMemUsage}]]*/,
+      resize: true,
+      formatter: function (value, data) { return Math.floor((value/memTotalTrunc *100) * 10)/10 + '%'; }, // Truncate
       colors: [ '#990033', '#009900' ]
     });
 
@@ -208,6 +232,7 @@
         morrisArea.redraw();
         morrisBar.redraw();
         morrisDonut.redraw();
+        morrisDonut2.redraw();
     });
 
     /*]]>*/

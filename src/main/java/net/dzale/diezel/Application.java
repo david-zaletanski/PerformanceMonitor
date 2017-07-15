@@ -6,12 +6,14 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 import java.sql.SQLException;
 
 @SpringBootApplication
 @EnableJpaRepositories("net.dzale.diezel.repository")
+@PropertySource("classpath:diezel.properties")
 public class Application {
 	
 	private static final Logger log = LoggerFactory.getLogger(Application.class);

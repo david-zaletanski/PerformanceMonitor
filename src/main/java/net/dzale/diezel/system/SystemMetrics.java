@@ -1,15 +1,19 @@
 package net.dzale.diezel.system;
 
+import com.sun.management.OperatingSystemMXBean;
+import net.dzale.diezel.ApplicationContextProvider;
 import oshi.SystemInfo;
 import oshi.hardware.CentralProcessor;
 import oshi.hardware.GlobalMemory;
 import oshi.hardware.HardwareAbstractionLayer;
 import oshi.hardware.NetworkIF;
 import oshi.software.os.FileSystem;
+import oshi.software.os.OSFileStore;
 import oshi.software.os.OperatingSystem;
 import oshi.util.FormatUtil;
 
 import javax.persistence.*;
+import java.lang.management.ManagementFactory;
 import java.util.Arrays;
 import java.util.Date;
 
@@ -59,26 +63,54 @@ public class SystemMetrics {
     @Column
     private long netBytesReceived = 0;
 
+    private SystemMetricsOperatingSystem operatingSystem;
+    private String operatingSystemName = "";
+
     public SystemMetrics() {
+        // Set configuration properties.
+        //defaultFilestoreName =
+    }
+
+    // Configuration Properties
+    private String defaultFilestoreName() {
+        String val = ApplicationContextProvider.getApplicationContext().getEnvironment().getProperty("diezel.metrics.defaultFilestoreName");
+        return (val == null ? "" : val);
     }
 
     public void setFromSystemInfo(SystemInfo systemInfo) {
         HardwareAbstractionLayer hardware = systemInfo.getHardware();
         OperatingSystem operatingSystem = systemInfo.getOperatingSystem();
+        OperatingSystemMXBean osBean = ManagementFactory.getPlatformMXBean(
+                OperatingSystemMXBean.class);
 
+        setOperatingSystemData(osBean);
         setCollectionTimestamp(new Date());
-        setProcessorData(hardware.getProcessor());
+        setProcessorData(hardware.getProcessor(), osBean);
         setMemoryData(hardware.getMemory());
         setFileSystemData(operatingSystem.getFileSystem());
         setNetworkIFData(hardware.getNetworkIFs());
     }
 
-    private void setProcessorData(CentralProcessor processor) {
+    private void setOperatingSystemData(OperatingSystemMXBean osBean) {
+        this.operatingSystemName = osBean.getName();
+        if (operatingSystemName.toUpperCase().contains("WINDOWS")) {
+            operatingSystem = SystemMetricsOperatingSystem.Windows;
+        } else if (operatingSystemName.toUpperCase().contains("MAC")) {
+            operatingSystem = SystemMetricsOperatingSystem.MacOS;
+        } else {
+            operatingSystem = SystemMetricsOperatingSystem.Linux;
+        }
+    }
+
+    private void setProcessorData(CentralProcessor processor, OperatingSystemMXBean osBean) {
         cpuPhyiscalCount = processor.getPhysicalProcessorCount();
         cpuLogicalCount = processor.getLogicalProcessorCount();
         cpuLoad = processor.getSystemCpuLoad();
         cpuLoadBetweenTicks = processor.getSystemCpuLoadBetweenTicks();
         cpuLoadAvg = processor.getSystemLoadAverage(3);
+        // CPU Load Avg in OSHI doesn't work for Windows, so we get it with a different approach.
+        if (this.operatingSystem.equals(SystemMetricsOperatingSystem.Windows))
+            cpuLoadAvg = new double[]{0.0, 0.0, 0.0};
         procLoadBetweenTicks = processor.getProcessorCpuLoadBetweenTicks();
         procLoad = processor.getProcessorCpuLoadBetweenTicks();
     }
@@ -93,8 +125,19 @@ public class SystemMetrics {
 
     private void setFileSystemData(FileSystem fs) {
         if (fs.getFileStores().length > 0) {
-            hdUsable = fs.getFileStores()[0].getUsableSpace();
-            hdTotal = fs.getFileStores()[0].getTotalSpace();
+            // Default to filestore 0
+            OSFileStore filestore = fs.getFileStores()[0];
+            // But look for main / user defined filestore
+            for (OSFileStore aFilestore : fs.getFileStores()) {
+                // Windows 'Local Fixed Disk (C:)'
+                String name = aFilestore.getName();
+                String defaultFilestoreName = defaultFilestoreName();
+                if (!defaultFilestoreName.isEmpty()
+                        && name.contains(defaultFilestoreName))
+                    filestore = aFilestore;
+            }
+            hdUsable = filestore.getUsableSpace();
+            hdTotal = filestore.getTotalSpace();
         }
     }
 

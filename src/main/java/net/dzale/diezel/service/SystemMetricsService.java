@@ -100,13 +100,6 @@ public class SystemMetricsService {
 
     public List<DataPoint4D> getRecentMetricsCPULoadDataPoints() throws DiezelException {
         List<DataPoint4D> dataPoints = new ArrayList<>();
-        /*for (SystemMetrics metric : recentMetrics) {
-            dataPoints.add(new DataPoint4D(metric.getCollectionTimestamp().getTime(),
-                    metric.getCpuLoadAvg()[0],
-                    metric.getCpuLoadAvg()[1],
-                    metric.getCpuLoadAvg()[2]
-            ));
-        }*/
         SystemMetrics metric = recentMetrics.peek();
         dataPoints.add(new DataPoint4D(metric.getCollectionTimestamp().getTime(),
                 metric.getCpuLoadAvg()[0],
@@ -123,8 +116,8 @@ public class SystemMetricsService {
     public List<MorrisDonutDataPoint> getRecentFSDataPoints() throws DiezelException {
         List<MorrisDonutDataPoint> dataPoints = new ArrayList<>();
         SystemMetrics metric = recentMetrics.peek();
-        dataPoints.add(new MorrisDonutDataPoint("Used", metric.getHdUsable()));
-        dataPoints.add(new MorrisDonutDataPoint("Unused", metric.getHdTotal() - metric.getHdUsable()));
+        dataPoints.add(new MorrisDonutDataPoint("Unused", metric.getHdUsable()));
+        dataPoints.add(new MorrisDonutDataPoint("Used", metric.getHdTotal() - metric.getHdUsable()));
         return dataPoints;
     }
 

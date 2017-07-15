@@ -27,7 +27,9 @@ public class DiezelController {
 		model.addAttribute("recentCpuLoad", systemMetricsService.getRecentMetricsCPULoadDataPoints());
 		model.addAttribute("recentFSTotal", systemMetricsService.getFSStorageTotal());
 		model.addAttribute("recentFSUsage", systemMetricsService.getRecentFSDataPoints());
-		return "index";
+        model.addAttribute("recentMemUsage", systemMetricsService.getRecentMemoryDataPoints());
+        model.addAttribute("recentMemTotal", systemMetricsService.getMemoryStorageTotal());
+        return "index";
 	}
 
 	@RequestMapping("/admin")
