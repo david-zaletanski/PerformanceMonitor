@@ -1,4 +1,4 @@
-package net.dzale.treeseeder.controller;
+package net.dzale.diezel.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

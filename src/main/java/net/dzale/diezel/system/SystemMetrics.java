@@ -1,4 +1,4 @@
-package net.dzale.treeseeder.system;
+package net.dzale.diezel.system;
 
 import oshi.SystemInfo;
 import oshi.hardware.CentralProcessor;

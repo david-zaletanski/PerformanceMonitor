@@ -1,4 +1,4 @@
-package net.dzale.treeseeder.exceptions;
+package net.dzale.diezel.exceptions;
 
 /**
  * A generic exception for the Diezel application, used as a catch-all for more specific errors.

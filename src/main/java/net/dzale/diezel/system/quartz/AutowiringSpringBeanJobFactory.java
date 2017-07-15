@@ -1,4 +1,4 @@
-package net.dzale.treeseeder.system.quartz;
+package net.dzale.diezel.system.quartz;
 
 import org.quartz.spi.TriggerFiredBundle;
 import org.springframework.beans.factory.config.AutowireCapableBeanFactory;

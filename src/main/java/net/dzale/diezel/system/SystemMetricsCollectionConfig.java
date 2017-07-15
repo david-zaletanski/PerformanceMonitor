@@ -1,10 +1,10 @@
-package net.dzale.treeseeder.system;
+package net.dzale.diezel.system;
 
-import net.dzale.treeseeder.exceptions.ComponentType;
-import net.dzale.treeseeder.exceptions.DiezelComponentException;
-import net.dzale.treeseeder.exceptions.DiezelException;
-import net.dzale.treeseeder.service.SystemMetricsService;
-import net.dzale.treeseeder.system.quartz.AutowiringSpringBeanJobFactory;
+import net.dzale.diezel.exceptions.ComponentType;
+import net.dzale.diezel.exceptions.DiezelComponentException;
+import net.dzale.diezel.exceptions.DiezelException;
+import net.dzale.diezel.service.SystemMetricsService;
+import net.dzale.diezel.system.quartz.AutowiringSpringBeanJobFactory;
 import org.quartz.*;
 import org.quartz.impl.StdSchedulerFactory;
 import org.slf4j.Logger;

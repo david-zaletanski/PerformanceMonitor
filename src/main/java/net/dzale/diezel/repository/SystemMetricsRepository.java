@@ -1,6 +1,6 @@
-package net.dzale.treeseeder.repository;
+package net.dzale.diezel.repository;
 
-import net.dzale.treeseeder.system.SystemMetrics;
+import net.dzale.diezel.system.SystemMetrics;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;

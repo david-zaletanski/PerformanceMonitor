@@ -1,4 +1,4 @@
-package net.dzale.treeseeder.exceptions;
+package net.dzale.diezel.exceptions;
 
 /**
  * This enum consists of the different types of components in the application.

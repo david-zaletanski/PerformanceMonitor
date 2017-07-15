@@ -1,10 +1,10 @@
-package net.dzale.treeseeder.repository;
+package net.dzale.diezel.repository;
 
 import java.util.List;
 
 import org.springframework.data.repository.CrudRepository;
 
-import net.dzale.treeseeder.model.Torrent;
+import net.dzale.diezel.model.Torrent;
 
 public interface TorrentRepository extends CrudRepository<Torrent, Long> {
 

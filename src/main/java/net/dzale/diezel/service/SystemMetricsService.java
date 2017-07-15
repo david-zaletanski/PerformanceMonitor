@@ -1,8 +1,8 @@
-package net.dzale.treeseeder.service;
+package net.dzale.diezel.service;
 
-import net.dzale.treeseeder.exceptions.DiezelException;
-import net.dzale.treeseeder.repository.SystemMetricsRepository;
-import net.dzale.treeseeder.system.SystemMetrics;
+import net.dzale.diezel.exceptions.DiezelException;
+import net.dzale.diezel.repository.SystemMetricsRepository;
+import net.dzale.diezel.system.SystemMetrics;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

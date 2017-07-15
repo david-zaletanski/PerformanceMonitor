@@ -1,4 +1,4 @@
-package net.dzale.treeseeder;
+package net.dzale.diezel;
 
 import org.h2.tools.Server;
 import org.slf4j.Logger;
@@ -11,7 +11,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import java.sql.SQLException;
 
 @SpringBootApplication
-@EnableJpaRepositories("net.dzale.treeseeder.repository")
+@EnableJpaRepositories("net.dzale.diezel.repository")
 public class Application {
 	
 	private static final Logger log = LoggerFactory.getLogger(Application.class);

@@ -1,4 +1,4 @@
-package net.dzale.treeseeder;
+package net.dzale.diezel;
 
 
 import org.slf4j.Logger;

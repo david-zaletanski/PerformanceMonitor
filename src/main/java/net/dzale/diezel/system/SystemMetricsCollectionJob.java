@@ -1,6 +1,6 @@
-package net.dzale.treeseeder.system;
+package net.dzale.diezel.system;
 
-import net.dzale.treeseeder.service.SystemMetricsService;
+import net.dzale.diezel.service.SystemMetricsService;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;

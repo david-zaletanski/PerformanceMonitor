@@ -1,4 +1,4 @@
-package net.dzale.treeseeder.exceptions;
+package net.dzale.diezel.exceptions;
 
 /**
  * @author dzale

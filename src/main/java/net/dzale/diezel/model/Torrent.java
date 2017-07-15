@@ -1,4 +1,4 @@
-package net.dzale.treeseeder.model;
+package net.dzale.diezel.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
