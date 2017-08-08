@@ -8,35 +8,55 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
  *
  */
 @Controller
 public class DiezelController {
-	private static final Logger log = LoggerFactory.getLogger(DiezelController.class);
+    private static final Logger log = LoggerFactory.getLogger(DiezelController.class);
 
-	@Autowired
-	SystemMetricsService systemMetricsService;
+    @Autowired
+    SystemMetricsService systemMetricsService;
 
-	@RequestMapping("/")
-	public String handleRequest(Model model) throws DiezelException {
-		// Create CPU Load Graph Data
-		model.addAttribute("recentSystemCpuLoad", systemMetricsService.getRecentMetricsSystemCPULoadDataPoints());
-		model.addAttribute("numVirtualCpu", systemMetricsService.getNumVirtualCPU());
-		model.addAttribute("recentCpuLoad", systemMetricsService.getRecentMetricsCPULoadDataPoints());
-		model.addAttribute("recentFSTotal", systemMetricsService.getFSStorageTotal());
-		model.addAttribute("recentFSUsage", systemMetricsService.getRecentFSDataPoints());
+    @RequestMapping("/")
+    public String handleRequest(Model model) throws DiezelException {
+        // Create CPU Load Graph Data
+        model.addAttribute("recentSystemCpuLoad", systemMetricsService.getRecentMetricsSystemCPULoadDataPoints());
+        model.addAttribute("numVirtualCpu", systemMetricsService.getNumVirtualCPU());
+        model.addAttribute("recentCpuLoad", systemMetricsService.getRecentMetricsCPULoadDataPoints());
+        model.addAttribute("recentFSTotal", systemMetricsService.getFSStorageTotal());
+        model.addAttribute("recentFSUsage", systemMetricsService.getRecentFSDataPoints());
         model.addAttribute("recentMemUsage", systemMetricsService.getRecentMemoryDataPoints());
         model.addAttribute("recentMemTotal", systemMetricsService.getMemoryStorageTotal());
         return "index";
-	}
+    }
 
-	@RequestMapping("/admin")
-	public String handleAdminRequest(Model model) throws DiezelException {
-		model.addAttribute("recentSystemCpuLoad", systemMetricsService.getRecentMetricsSystemCPULoadDataPoints());
-		model.addAttribute("recentCpuLoad", systemMetricsService.getRecentMetricsCPULoadDataPoints());
-		return "admin";
-	}
-	
+    @RequestMapping("/admin")
+    public String handleAdminRequest(Model model) throws DiezelException {
+        model.addAttribute("recentSystemCpuLoad", systemMetricsService.getRecentMetricsSystemCPULoadDataPoints());
+        model.addAttribute("recentCpuLoad", systemMetricsService.getRecentMetricsCPULoadDataPoints());
+        return "admin";
+    }
+
+    @RequestMapping("/performance")
+    public String handlePerformanceRequest(Model model) throws DiezelException {
+        // Create CPU Load Graph Data
+        model.addAttribute("recentSystemCpuLoad", systemMetricsService.getRecentMetricsSystemCPULoadDataPoints());
+        model.addAttribute("numVirtualCpu", systemMetricsService.getNumVirtualCPU());
+        model.addAttribute("recentCpuLoad", systemMetricsService.getRecentMetricsCPULoadDataPoints());
+        model.addAttribute("recentFSTotal", systemMetricsService.getFSStorageTotal());
+        model.addAttribute("recentFSUsage", systemMetricsService.getRecentFSDataPoints());
+        model.addAttribute("recentMemUsage", systemMetricsService.getRecentMemoryDataPoints());
+        model.addAttribute("recentMemTotal", systemMetricsService.getMemoryStorageTotal());
+        return "performance";
+    }
+
+
+    @RequestMapping(path = "/gramslist", method = RequestMethod.GET)
+    public String handleGramsRequest(Model model) throws DiezelException {
+        return "gramslist";
+    }
+
 }

@@ -84,7 +84,6 @@
 		    <artifactId>webjars-locator</artifactId>
 		</dependency> -->
 
-
 		<!-- Database -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -118,7 +117,20 @@
 			<scope>runtime</scope>
         </dependency>
 
-		<!-- Hardware Monitoring -->
+        <!-- Object Mapping -->
+        <dependency>
+            <groupId>org.modelmapper</groupId>
+            <artifactId>modelmapper</artifactId>
+            <version>0.7.5</version>
+        </dependency>
+        <dependency>
+            <groupId>org.modelmapper.extensions</groupId>
+            <artifactId>modelmapper-spring</artifactId>
+            <version>1.1.0</version>
+        </dependency>
+
+
+        <!-- Hardware Monitoring -->
 		<dependency>
 			<groupId>com.github.oshi</groupId>
 			<artifactId>oshi-core</artifactId>

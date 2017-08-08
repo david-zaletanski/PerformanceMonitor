@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+
+    <title>Treeseeder</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="webjars/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
+
+    <!-- MetisMenu CSS -->
+    <link href="webjars/metisMenu/1.1.2/metisMenu.min.css" rel="stylesheet"/>
+
+    <!-- Custom CSS -->
+    <link href="webjars/startbootstrap-sb-admin-2/3.3.7+1/css/sb-admin-2.css" rel="stylesheet"/>
+
+    <!-- Custom Fonts -->
+    <link href="webjars/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Morris Charts CSS -->
+    <link href="webjars/morrisjs/0.5.1/morris.css" rel="stylesheet"/>
+
+</head>
+
+<body>
+
+<div id="wrapper">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="index.html">Kilo Kai Dashboard</a>
+        </div>
+        <!-- /.navbar-header -->
+
+        <div class="navbar-default sidebar" role="navigation">
+            <div class="sidebar-nav navbar-collapse">
+                <ul class="nav" id="side-menu">
+                    <li>
+                        <a href="grams.html"><i class="fa fa-dashboard fa-fw"></i> Grams</a>
+                    </li>
+                    <li>
+                        <a href="demo.html"><i class="fa fa-dashboard fa-fw"></i> Demo</a>
+                    </li>
+                    <li>
+                        <a href="performance.html"><i class="fa fa-dashboard fa-fw"></i> Performance</a>
+                    </li>
+                    <li>
+                        <a href="login.html"><i class="fa fa-users fa-fw"></i> Login</a>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-fw"></i> </a>
+                    </li>
+                    <li>
+                        <a href="http://5.9.56.254:32400/web"><i class="fa fa-play-circle fa-fw"></i> Plex</a>
+                    </li>
+                    <li>
+                        <a href="http://5.9.56.254:80/ruTorrent/"><i class="fa fa-cloud-download fa-fw"></i>
+                            ruTorrent</a>
+                    </li>
+                    <li>
+                        <a href="http://www.iptorrents.com/"><i class="fa fa-cloud-upload fa-fw"></i> IPTorrents.com</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.sidebar-collapse -->
+        </div>
+        <!-- /.navbar-static-side -->
+    </nav>
+
+    <!-- Page Content -->
+    <div id="page-wrapper">
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">Dashboard</h1>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+
+            <!-- /.row -->
+        </div>
+        <!-- /.container-fluid -->
+
+        <div class="row">
+            <div class="col-sm-3">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        System CPU Utilization % (Last 60sec)
+                    </div>
+                    <div class="panel-body">
+                        <div id="morris-area-chart"></div>
+                    </div>
+                    <!--<div class="panel-footer">-->
+                    <!--System CPU Load per second over the last minute.-->
+                    <!--</div>-->
+                </div>
+            </div>
+            <!-- /.col-lg-4 -->
+            <div class="col-sm-3">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        UNIX System CPU Load Average (Out of <b th:text="${numVirtualCpu}"/> vCPU)
+                    </div>
+                    <div class="panel-body">
+                        <div id="morris-bar-chart"></div>
+                    </div>
+                    <!--<div class="panel-footer">
+                        Panel Footer
+                    </div>-->
+                </div>
+            </div>
+            <!-- /.col-lg-4 -->
+            <div class="col-sm-3">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        Current File System Disk Utilization %
+                    </div>
+                    <div class="panel-body">
+                        <div id="morris-donut-chart"></div>
+                    </div>
+                    <!--<div class="panel-footer">-->
+                    <!--Panel Footer-->
+                    <!--</div>-->
+                </div>
+            </div>
+            <!-- /.col-lg-4 -->
+            <div class="col-sm-3">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        Current System Memory Utilization %
+                    </div>
+                    <div class="panel-body">
+                        <div id="morris-donut-chart2"></div>
+                    </div>
+                    <!--<div class="panel-footer">-->
+                    <!--Panel Footer-->
+                    <!--</div>-->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /#page-wrapper -->
+</div>
+<!-- /#wrapper -->
+
+<!-- jQuery -->
+<script src="webjars/jquery/3.2.1/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<!-- Metis Menu Plugin JavaScript -->
+<script src="webjars/metisMenu/1.1.2/metisMenu.min.js"></script>
+
+<!-- Morris Charts JavaScript -->
+<script src="webjars/raphaeljs/2.1.4/raphael-min.js"></script>
+<script src="webjars/morrisjs/0.5.1/morris.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="webjars/startbootstrap-sb-admin-2/3.3.7+1/js/sb-admin-2.js"></script>
+
+<script type="text/javascript" th:inline="javascript">
+
+    /*<![CDATA[*/
+
+    var morrisArea = Morris.Area({
+      element: 'morris-area-chart',
+      data: /*[[${recentSystemCpuLoad}]]*/,
+      xkey: 'x',
+      ykeys: ['y'],
+      labels: ['System CPU Load'],
+      xLabels: ['second'],
+      resize: true,
+      hideHover: 'always',
+      pointSize: 0
+    });
+
+    var morrisBarFormatX = function (x) {
+       return 'CPU Load Interval';
+    };
+    var morrisBar = Morris.Bar({
+      element: 'morris-bar-chart',
+      data: /*[[${recentCpuLoad}]]*/,
+      xkey: 'x',
+      ykeys: ['a', 'b', 'c'],
+      labels: ['CPU Load 5min', 'CPU Load 10min', 'CPU Load 15min'],
+      xLabels: ['second'],
+      xLabelFormat: morrisBarFormatX,
+      resize: true,
+      hideHover: 'auto',
+      barColors: [ '#336600', '#666633', '#999966' ]
+    });
+
+    var hdTotal = /*[[${recentFSTotal}]]*/;
+    var hdTotalTrunc = Math.floor(hdTotal * 10) / 10;
+
+    var morrisDonut = Morris.Donut({
+      element: 'morris-donut-chart',
+      data: /*[[${recentFSUsage}]]*/,
+      resize: true,
+      formatter: function (value, data) { return Math.floor((value/hdTotalTrunc *100) * 10)/10 + '%'; }, // Truncate
+      colors: [ '#009900', '#990033' ]
+    });
+
+    var memTotal = /*[[${recentMemTotal}]]*/;
+    var memTotalTrunc = Math.floor(memTotal * 10) / 10;
+
+    var morrisDonut2 = Morris.Donut({
+      element: 'morris-donut-chart2',
+      data: /*[[${recentMemUsage}]]*/,
+      resize: true,
+      formatter: function (value, data) { return Math.floor((value/memTotalTrunc *100) * 10)/10 + '%'; }, // Truncate
+      colors: [ '#990033', '#009900' ]
+    });
+
+    /* Resizes morris graphs when page resizes. */
+    $(window).resize(function () {
+        morrisArea.redraw();
+        morrisBar.redraw();
+        morrisDonut.redraw();
+        morrisDonut2.redraw();
+    });
+
+    /*]]>*/
+
+
+
+</script>
+
+</body>
+
+</html>

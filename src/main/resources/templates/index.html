@@ -56,7 +56,13 @@
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
                         <li>
-                            <a href="index.html"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                            <a href="grams.html"><i class="fa fa-dashboard fa-fw"></i> Grams</a>
+                        </li>
+                        <li>
+                            <a href="demo.html"><i class="fa fa-dashboard fa-fw"></i> Demo</a>
+                        </li>
+                        <li>
+                            <a href="performance.html"><i class="fa fa-dashboard fa-fw"></i> Performance</a>
                         </li>
                         <li>
                         	<a href="login.html"><i class="fa fa-users fa-fw"></i> Login</a>
@@ -94,64 +100,8 @@
                 <!-- /.row -->
             </div>
             <!-- /.container-fluid -->
-            
-            <div class="row">
-                <div class="col-sm-3">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">
-                            System CPU Utilization % (Last 60sec)
-                        </div>
-                        <div class="panel-body">
-                            <div id="morris-area-chart"></div>
-                        </div>
-                        <!--<div class="panel-footer">-->
-                        <!--System CPU Load per second over the last minute.-->
-                        <!--</div>-->
-                    </div>
-                </div>
-                <!-- /.col-lg-4 -->
-                <div class="col-sm-3">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">
-                            UNIX System CPU Load Average (Out of <b th:text="${numVirtualCpu}"/> vCPU)
-                        </div>
-                        <div class="panel-body">
-                            <div id="morris-bar-chart"></div>
-                        </div>
-                        <!--<div class="panel-footer">
-                            Panel Footer
-                        </div>-->
-                    </div>
-                </div>
-                <!-- /.col-lg-4 -->
-                <div class="col-sm-3">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">
-                            Current File System Disk Utilization %
-                        </div>
-                        <div class="panel-body">
-                            <div id="morris-donut-chart"></div>
-                        </div>
-                        <!--<div class="panel-footer">-->
-                        <!--Panel Footer-->
-                        <!--</div>-->
-                    </div>
-                </div>
-                <!-- /.col-lg-4 -->
-                <div class="col-sm-3">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">
-                            Current System Memory Utilization %
-                        </div>
-                        <div class="panel-body">
-                            <div id="morris-donut-chart2"></div>
-                        </div>
-                        <!--<div class="panel-footer">-->
-                        <!--Panel Footer-->
-                        <!--</div>-->
-                    </div>
-                </div>
-            </div>
+
+
         </div>
         <!-- /#page-wrapper -->
     </div>

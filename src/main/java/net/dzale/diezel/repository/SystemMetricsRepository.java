@@ -10,8 +10,10 @@ import java.util.List;
  */
 public interface SystemMetricsRepository extends CrudRepository<SystemMetrics, Long> {
 
+    // Current Metrics
     SystemMetrics findFirstByOrderByCollectionTimestampDesc();
 
+    // Historical Metrics (Last 5 Hours)
     List<SystemMetrics> findFirst5ByOrderByCollectionTimestampDesc();
 
 }

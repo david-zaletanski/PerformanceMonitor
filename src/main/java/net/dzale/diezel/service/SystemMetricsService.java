@@ -39,7 +39,7 @@ public class SystemMetricsService {
     private Queue<SystemMetrics> recentMetrics;
 
     public SystemMetricsService() {
-        recentMetrics = new LinkedList<>();
+        recentMetrics = new LinkedList<SystemMetrics>();
     }
 
     /**
@@ -51,9 +51,9 @@ public class SystemMetricsService {
         persistWhenLastPersistedGreaterThanInterval(newMetrics);
 
         // Add metrics to cache and clear old entities.
-        if (!new Double(newMetrics.getCpuLoad()).equals(0.0)) // Prevents double-adding during startup
-            recentMetrics.add(newMetrics);
-        if (recentMetrics.size() > MAX_RECENT_QUEUE_SIZE) {
+        recentMetrics.add(newMetrics);
+
+        if (!recentMetrics.isEmpty() && recentMetrics.size() > MAX_RECENT_QUEUE_SIZE) {
             recentMetrics.remove();
         }
 

@@ -36,6 +36,9 @@ dependencies {
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version:'1.5.3.RELEASE'
     
 
+    compile group: 'org.modelmapper', name: 'modelmapper', version: '0.7.5'
+    compile group: 'org.modelmapper.extensions', name: 'modelmapper-spring', version: '1.1.0'
+
     // JavaScript Libraries
     compile group: 'org.webjars', name: 'bootstrap', version:'3.3.7'
     compile group: 'org.webjars', name: 'jquery', version:'3.2.1'
