@@ -1,6 +1,6 @@
-package net.dzale.diezel.system;
+package net.dzale.diezel.system.metrics;
 
-import net.dzale.diezel.service.SystemMetricsService;
+import net.dzale.diezel.service.metrics.SystemMetricsService;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
@@ -10,7 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
- * This job will collect performance metrics and cache/persist them as necessary when executed.
+ * This job will collect, cache, and/or persist performance metrics when executed.
+ *
  * @author dzale
  * @see <a href="https://github.com/oshi/oshi/blob/master/oshi-core/src/test/java/oshi/SystemInfoTest.java">https://github.com/oshi/oshi/blob/master/oshi-core/src/test/java/oshi/SystemInfoTest.java</a>
  */

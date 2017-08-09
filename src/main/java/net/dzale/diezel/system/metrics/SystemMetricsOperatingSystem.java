@@ -1,4 +1,4 @@
-package net.dzale.diezel.system;
+package net.dzale.diezel.system.metrics;
 
 /**
  * Created by zalet on 7/15/2017.

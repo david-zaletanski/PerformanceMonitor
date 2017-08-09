@@ -1,4 +1,4 @@
-package net.dzale.diezel;
+package net.dzale.diezel.example;
 
 
 import org.slf4j.Logger;

@@ -1,6 +1,6 @@
 package net.dzale.diezel.controller.grams;
 
-import net.dzale.diezel.model.database.GramEntity;
+import net.dzale.diezel.model.entity.GramEntity;
 import net.dzale.diezel.model.grams.Gram;
 import net.dzale.diezel.service.GramService;
 import org.slf4j.Logger;
@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.*;
  */
 @Controller
 @RequestMapping("/grams")
-public class DiezelGramController {
-    Logger log = LoggerFactory.getLogger(DiezelGramController.class);
+public class GramController {
+    Logger log = LoggerFactory.getLogger(GramController.class);
 
     @Autowired
     private GramService gramService;

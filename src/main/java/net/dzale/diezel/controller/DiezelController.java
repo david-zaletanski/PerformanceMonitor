@@ -1,14 +1,18 @@
 package net.dzale.diezel.controller;
 
 import net.dzale.diezel.exceptions.DiezelException;
-import net.dzale.diezel.service.SystemMetricsService;
+import net.dzale.diezel.model.grams.Gram;
+import net.dzale.diezel.service.GramService;
+import net.dzale.diezel.service.metrics.SystemMetricsService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
  *
@@ -19,6 +23,8 @@ public class DiezelController {
 
     @Autowired
     SystemMetricsService systemMetricsService;
+    @Autowired
+    GramService gramService;
 
     @RequestMapping("/")
     public String handleRequest(Model model) throws DiezelException {
@@ -54,9 +60,22 @@ public class DiezelController {
     }
 
 
-    @RequestMapping(path = "/gramslist", method = RequestMethod.GET)
+    //@RequestMapping(path = "/gramslist", method = RequestMethod.GET)
+    @GetMapping("/gramslist")
     public String handleGramsRequest(Model model) throws DiezelException {
+
+        model.addAttribute("gram", new Gram());
+        model.addAttribute("grams", gramService.getGrams());
+
         return "gramslist";
     }
 
+    //@RequestMapping(path = "/gramslist", method = RequestMethod.POST)
+    @PostMapping("/gramslist")
+    public String handleGramsPost(@ModelAttribute Gram gram, Model model) throws DiezelException {
+
+        gramService.addGram(gram.getBody());
+
+        return handleGramsRequest(model);
+    }
 }

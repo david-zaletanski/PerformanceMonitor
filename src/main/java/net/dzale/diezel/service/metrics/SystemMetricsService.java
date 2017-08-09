@@ -1,8 +1,8 @@
-package net.dzale.diezel.service;
+package net.dzale.diezel.service.metrics;
 
 import net.dzale.diezel.exceptions.DiezelException;
-import net.dzale.diezel.repository.SystemMetricsRepository;
-import net.dzale.diezel.system.SystemMetrics;
+import net.dzale.diezel.repository.metrics.SystemMetricsRepository;
+import net.dzale.diezel.system.metrics.SystemMetrics;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -110,7 +110,9 @@ public class SystemMetricsService {
     }
 
     public int getNumVirtualCPU() {
-        return recentMetrics.peek().getCpuLogicalCount();
+        //if (recentMetrics.peek() != null)
+        //return recentMetrics.peek().getCpuLogicalCount();
+        return (recentMetrics.size() > 0 ? recentMetrics.peek().getCpuLogicalCount() : 0);
     }
 
     public List<MorrisDonutDataPoint> getRecentFSDataPoints() throws DiezelException {

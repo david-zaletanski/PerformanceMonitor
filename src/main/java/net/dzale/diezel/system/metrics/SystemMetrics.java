@@ -1,4 +1,4 @@
-package net.dzale.diezel.system;
+package net.dzale.diezel.system.metrics;
 
 import com.sun.management.OperatingSystemMXBean;
 import net.dzale.diezel.ApplicationContextProvider;
@@ -18,7 +18,8 @@ import java.util.Arrays;
 import java.util.Date;
 
 /**
- * Transforms and stores system metric data.
+ * A data structure for holding and persisting a variety of current system metrics.
+ *
  * @author dzale
  */
 @Entity

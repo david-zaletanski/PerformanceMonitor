@@ -1,6 +1,5 @@
 package net.dzale.diezel.controller;
 
-import net.dzale.diezel.exceptions.DiezelComponentException;
 import net.dzale.diezel.exceptions.DiezelException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,11 +23,6 @@ public class DiezelErrorController {
     private void handleDiezelException(DiezelException ex) {
         log.error("Caught generic DiezelException.", ex);
         // TODO: Persist.
-    }
-
-    @ExceptionHandler( {DiezelComponentException.class })
-    private void handleDiezelComponentException(DiezelComponentException ex) {
-        log.error("Critical error occurred in Diezel component "+ex.getComponentType(), ex);
     }
 
 }

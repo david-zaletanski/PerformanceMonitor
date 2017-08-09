@@ -23,7 +23,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
             .authorizeRequests()
-                .antMatchers("/console/**").permitAll()     // Allow H2 database browser console
+                .antMatchers("/console/**").permitAll()     // Allow H2 entity browser console
             .antMatchers("/webjars/**").permitAll()		// Allow our libraries to be accessed.
                 //.antMatchers("/").hasRole("ADMIN") 			// Don't allow anyone to see page unless logged in.
                 //.antMatchers("/admin").hasRole("ADMIN")

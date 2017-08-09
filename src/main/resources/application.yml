@@ -1,8 +1,15 @@
+# Logging
+logging:
+  #path: C:\logs
+  #file: diezel.log
+  level:
+    org.springframework: INFO
+    net.dzale.diezel: INFO
+  pattern:
+    console: "%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"
+    #file:
 
-management:
-  security:
-    enabled: false
-
+# Spring
 spring:
   datasource:
     url: jdbc:h2:mem:AZ;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
@@ -14,6 +21,12 @@ spring:
   thymeleaf:
     cache: false
 
+# Security
+management:
+  security:
+    enabled: false
+
+# Endpoint
 server:
   port: 8080
 

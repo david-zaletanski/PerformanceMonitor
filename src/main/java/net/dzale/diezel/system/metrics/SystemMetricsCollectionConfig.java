@@ -1,9 +1,7 @@
-package net.dzale.diezel.system;
+package net.dzale.diezel.system.metrics;
 
-import net.dzale.diezel.exceptions.ComponentType;
-import net.dzale.diezel.exceptions.DiezelComponentException;
 import net.dzale.diezel.exceptions.DiezelException;
-import net.dzale.diezel.service.SystemMetricsService;
+import net.dzale.diezel.service.metrics.SystemMetricsService;
 import net.dzale.diezel.system.quartz.AutowiringSpringBeanJobFactory;
 import org.quartz.*;
 import org.quartz.impl.StdSchedulerFactory;
@@ -21,7 +19,9 @@ import org.springframework.scheduling.quartz.SpringBeanJobFactory;
 import java.io.IOException;
 
 /**
- * Created by dzale on 7/7/17.
+ * Creates a Quartz Scheduler for the system metrics collection job.
+ *
+ * @author dzale
  */
 @Configuration
 public class SystemMetricsCollectionConfig {
@@ -43,9 +43,9 @@ public class SystemMetricsCollectionConfig {
             scheduler.start();
             return scheduler;
         } catch (IOException ex) {
-            throw new DiezelComponentException(ComponentType.SCHEDULER, "Unable to find quartz.properties file in classpath.", ex);
+            throw new DiezelException("Unable to find quartz.properties file in classpath.", ex);
         } catch (SchedulerException ex) {
-            throw new DiezelComponentException(ComponentType.SCHEDULER, "Error creating scheduler.", ex);
+            throw new DiezelException("Error creating scheduler.", ex);
         }
     }
 

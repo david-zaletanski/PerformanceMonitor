@@ -1,10 +1,12 @@
-package net.dzale.diezel.model.database;
+package net.dzale.diezel.model.entity;
 
 import javax.persistence.*;
 import java.util.Date;
 
 /**
- * Created by zalet on 8/5/2017.
+ * The database entity representation of the Gram class.
+ *
+ * @author dzale
  */
 @Entity
 public class GramEntity {

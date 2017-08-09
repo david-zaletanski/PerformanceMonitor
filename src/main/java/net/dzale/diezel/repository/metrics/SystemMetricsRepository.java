@@ -1,14 +1,14 @@
-package net.dzale.diezel.repository;
+package net.dzale.diezel.repository.metrics;
 
-import net.dzale.diezel.system.SystemMetrics;
-import org.springframework.data.repository.CrudRepository;
+import net.dzale.diezel.system.metrics.SystemMetrics;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
 /**
  * Created by dzale on 7/7/17.
  */
-public interface SystemMetricsRepository extends CrudRepository<SystemMetrics, Long> {
+public interface SystemMetricsRepository extends JpaRepository<SystemMetrics, Long> {
 
     // Current Metrics
     SystemMetrics findFirstByOrderByCollectionTimestampDesc();
