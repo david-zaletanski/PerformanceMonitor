@@ -154,9 +154,10 @@
                                     </span>
                             <div class="chat-body clearfix">
                                 <div class="header">
-                                    <strong class="primary-font">Jack Sparrow</strong>
+                                    <strong class="primary-font">dzale</strong>
                                     <small class="pull-right text-muted">
-                                        <i class="fa fa-clock-o fa-fw"></i> 12 mins ago
+                                        <i class="fa fa-clock-o fa-fw" th:text="${gram.getModifiedAsMinutesAgo()}"></i>
+                                        <!--12 mins ago-->
                                     </small>
                                 </div>
                                 <p th:text="${gram.body}">

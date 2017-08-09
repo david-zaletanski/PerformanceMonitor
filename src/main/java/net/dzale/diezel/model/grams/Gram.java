@@ -7,18 +7,15 @@ import java.util.Date;
 /**
  * A model class defining a basic unit of text, a gram.
  *
- * @drzale
+ * @dzale
  */
 public class Gram {
 
-
     @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss")
-    Date created;
-
+    private Date created;
     @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss")
-    Date modified;
-
-    String body;
+    private Date modified;
+    private String body;
 
     public Gram() {
         this.body = "";
@@ -55,5 +52,23 @@ public class Gram {
     public void setBody(String body) {
         this.body = body;
         this.modified = new Date();
+    }
+
+    public String getModifiedAsMinutesAgo() {
+        Date current = new Date();
+        long seconds = (current.getTime() - modified.getTime()) / 1000;
+        if (seconds < 60)
+            return seconds + " seconds ago";
+        long minutes = seconds / 60;
+        if (minutes < 60)
+            return minutes + " minutes ago";
+        long hours = minutes / 60;
+        if (hours < 24)
+            return hours + " hours ago";
+        long days = hours / 24;
+        if (days < 365)
+            return days + " days ago";
+        long years = days / 365;
+        return years + " years ago";
     }
 }

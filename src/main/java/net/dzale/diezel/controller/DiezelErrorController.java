@@ -21,8 +21,8 @@ public class DiezelErrorController {
 
     @ExceptionHandler( {DiezelException.class })
     private void handleDiezelException(DiezelException ex) {
-        log.error("Caught generic DiezelException.", ex);
-        // TODO: Persist.
+        log.error("Caught a generic DiezelException: ", ex);
+        // TODO: Ensure real errors / exceptions are persisted.
     }
 
 }
