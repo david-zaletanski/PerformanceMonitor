@@ -42,11 +42,11 @@ spring:
   profiles: prod
   datasource:
     url: jdbc:mysql://localhost:3306/diezel_db
-    username: springuser
-    password: aspringuserpassword
+    username: diezel
+    password: theF150isthebesttruck
   jpa:
     hibernate:
-      ddl-auto: none # This is the default for MySQL, no change to the database structure
+      ddl-auto: create # This is the default for MySQL, no change to the database structure
       #ddl-auto: update # Hibernate changes the database according to the given Entity structures
       #ddl-auto: create # Creates the database every time, but don't drop it when close
       #ddl-auto: create-drop # Creates the database then drops it when the SessionFactory closes
