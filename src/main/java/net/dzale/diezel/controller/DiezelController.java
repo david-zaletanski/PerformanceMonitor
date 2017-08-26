@@ -39,6 +39,12 @@ public class DiezelController {
         return "index";
     }
 
+    /**
+     * Test comment.
+     *
+     * @return
+     * @throws DiezelException
+     */
     @RequestMapping("/admintest")
     public String handleTestRequest() throws DiezelException {
         log.debug("TEST ENDPOINT CALLED");
