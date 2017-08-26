@@ -39,6 +39,12 @@ public class DiezelController {
         return "index";
     }
 
+    @RequestMapping("/admintest")
+    public String handleTestRequest() throws DiezelException {
+        log.debug("TEST ENDPOINT CALLED");
+        return "TEST SUCCESS";
+    }
+
     @RequestMapping("/admin")
     public String handleAdminRequest(Model model) throws DiezelException {
         model.addAttribute("recentSystemCpuLoad", systemMetricsService.getRecentMetricsSystemCPULoadDataPoints());
