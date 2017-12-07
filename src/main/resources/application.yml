@@ -3,10 +3,10 @@
 # Logging
 logging:
   #path: C:\logs
-  #file: diezel.log
+  #file: performancedashboard.log
   level:
     org.springframework: INFO
-    net.dzale.diezel: INFO
+    net.dzale.performancedashboard: INFO
   pattern:
     console: "%d{HH:mm:ss.SSS} %-5level %logger{40} - %msg%n"
     #file:
@@ -42,11 +42,11 @@ spring:
   profiles: prod
   datasource:
     url: jdbc:mysql://localhost:3306/diezel_db
-    username: diezel
+    username: performancedashboard
     password: theF150isthebesttruck
   jpa:
     hibernate:
-      ddl-auto: create # This is the default for MySQL, no change to the database structure
+      ddl-auto: create  # This is the default for MySQL, no change to the database structure
       #ddl-auto: update # Hibernate changes the database according to the given Entity structures
       #ddl-auto: create # Creates the database every time, but don't drop it when close
       #ddl-auto: create-drop # Creates the database then drops it when the SessionFactory closes
