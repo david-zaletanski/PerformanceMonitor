@@ -9,6 +9,8 @@ A basic security implementation exists to view the site.
 
 Use the username/password:	admin/password
 
+*Note:* This was a fun experiment at the time for teaching me how I could create dashboards by hand. However, if you are looking for an open-source solution to meet your real performance monitoring/alerting needs, I would highly recommend using a combination of Grafana and something like Prometheus + node_export for a fully featured solution. These can be easily deployed on any server via Docker for very quick implementation.
+
 # Dashboard
 
 ## Metrics
